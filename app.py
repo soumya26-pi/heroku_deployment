@@ -1,8 +1,26 @@
 from flask import Flask,request
-# import cv2
-# import time
 from flask import Flask, request, jsonify
 import numpy as np
+
+import torch
+import cv2
+import time
+import time
+import numpy as np
+model = torch.hub.load('ultralytics/yolov5', 'custom',path="yolov5s.onnx",force_reload=True)
+classes = model.names
+device = 'cuda' if torch.cuda.is_available() else 'cpu'
+print("\n\nDevice Used:",device)
+print("-------------------------------------------")
+
+
+def score_frame(frame):
+        model.to(device)
+        frame = [frame]
+        results = model(frame)
+        labels, cord = results.xyxyn[0][:, -1], results.xyxyn[0][:, :-1]
+        return labels, cord
+
 
 
 app=Flask(__name__)
@@ -15,9 +33,9 @@ def hello_world():
 def predict():
     # if request.method=="POST":
     output=request.form.get("frame")
-    return jsonify({"frame":str(output)})
-    # else:
-    #     return jsonify({"frame":"Error"})
+    result=score_frame(output)
+    return jsonify({"frame":str(result)})
+  
 
 
 
