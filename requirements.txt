@@ -56,9 +56,6 @@ onnx==1.12.0
 onnxruntime==1.12.0
 opencv-contrib-python==4.6.0.66
 opencv-python==4.5.5.64
-openvino==2022.1.0
-openvino-dev==2022.1.0
-openvino-telemetry==2022.1.1
 packaging==21.3
 pandas==1.1.5
 parasail==1.2.4
