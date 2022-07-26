@@ -7,7 +7,7 @@ import cv2
 import time
 import time
 import numpy as np
-model = torch.hub.load('ultralytics/yolov5', 'custom',path="yolov5s.onnx",force_reload=True)
+model = torch.hub.load('ultralytics/yolov5', 'custom',path="yolo.pt",force_reload=True)
 classes = model.names
 device = 'cuda' if torch.cuda.is_available() else 'cpu'
 print("\n\nDevice Used:",device)
